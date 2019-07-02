@@ -1,0 +1,67 @@
+<apex:page controller="Exam3OrderRegistrationController" docType="HTML-5.0"
+           lightningStylesheets="true">
+
+    <apex:form id="form">
+        <apex:slds/>
+        <apex:pageMessages/>
+        <apex:pageBlock>
+            <div id="snackbar"></div>
+            <apex:pageBlockSection columns="2" showHeader="true">
+                <apex:inputField styleClass="slds-input" required="true"
+                                 value="{!contact.Email}"
+                                 style="width:350px"
+                                 label="{!$ObjectType.Contact.fields.Email.Label}"/>
+                <apex:outputField label="{!$ObjectType.Product_Table__c.fields.Name.Label}"
+                                  value="{!getProductDetail.Name}"/>
+                <apex:inputField styleClass="slds-input"
+                                 value="{!contact.Phone}"
+                                 style="width:350px"
+                                 label="Phone"/>
+                <apex:outputField id="cost"
+                                  label="{!$ObjectType.Product_Table__c.fields.Unit_Price__c.Label}"
+                                  value="{!getProductDetail.Unit_Price__c}"/>
+
+                <apex:inputField styleClass="slds-input"
+                                 value="{!contact.FirstName}"
+                                 style="width:350px"
+                                 label="{!$ObjectType.Contact.fields.FirstName.Label}"/>
+                <apex:input label="Unit_Count"
+                            html-min="0" type="number"
+                            styleClass="slds-input" value="{!unitCount}"
+                            required="true"
+                            style="width:350px"
+                            id="getCount">
+                    <apex:actionSupport event="onchange" action="{!getTotalAmount}"/>
+                </apex:input>
+                <apex:inputField styleClass="slds-input"
+                                 value="{!contact.LastName}"
+                                 style="width:350px"
+                                 label="{!$ObjectType.Contact.fields.LastName.Label}"/>
+                <apex:outputText
+                        label="Total Amount"
+                        value="{!totalAmount}"/>
+            </apex:pageBlockSection>
+            <span style="display:none" id="cost">{!getProductDetail.Unit_Price__c}</span>
+            <div align="center" draggable="false" class="slds-docked-form-footer">
+                <apex:outputLink styleClass="slds-button slds-button_neutral"
+                                 style="width:120px"
+                                 value="/apex/Exam3DetailDescriptionPage?id={!getProductDetail.Id}">
+                    To_Details
+                </apex:outputLink>
+                <apex:outputLink styleClass="slds-button slds-button_neutral"
+                                 style="width:120px" value="/apex/Exam3Page">
+                    To_Shopping
+                </apex:outputLink>
+                <apex:commandButton style="width:120px; background-color: darkblue;"
+                                    styleClass="slds-button slds-button_brand" action="{!orderBuy}"
+                                    value="Buy">
+                </apex:commandButton>
+            </div>
+            <div style="display:none">
+                <div align="right">Count:</div>
+                <div align="left"><span id="count">{!getProductDetail.Unit_Available__c}</span></div>
+            </div>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

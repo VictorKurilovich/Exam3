@@ -1,0 +1,39 @@
+<apex:page Controller="Exam3DetailDescriptionController" >
+    <apex:form >
+        <apex:messages />
+        <apex:slds />
+        <apex:pageBlock >
+            <h1 align="center" style="font-size:25px">{!product.Name}</h1>
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:image styleClass="slds-align--absolute-center" value="{!product.Image_Url__c}" width="50%"
+                                height="50%"/>
+                </apex:pageBlockSectionItem>
+                <div align="left" style="font-size:20px">
+                    AMOUNT
+                    <div style="font-size:15px">
+                            {!product.Unit_Available__c}
+                    </div>
+                </div>
+                <div align="left" style="font-size:20px">
+                    DESCRIPTION:
+                    <div style="font-size:15px">
+                            {!product.Product__c}
+                    </div>
+                </div>
+            </apex:pageBlockSection>
+            <div align="center" class="slds-docked-form-footer">
+                <apex:outputLink styleClass="slds-button slds-button_neutral"
+                                 style="width:120px"
+                                 value="/apex/Exam3Page">
+                    To_Shopping
+                </apex:outputLink>
+                <apex:outputLink style="width:70px; background-color: darkblue;"
+                                 styleClass="slds-button slds-button_brand"
+                                 value="/apex/Exam3OrderRegistrationPage?id={!product.Id}" target="_blank">
+                    Buy
+                </apex:outputLink>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

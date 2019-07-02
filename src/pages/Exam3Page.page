@@ -1,0 +1,57 @@
+<apex:page controller="Exam3Controller">
+    <apex:form >
+
+        <apex:slds />
+        <apex:messages />
+        <apex:pageBlock >
+            <apex:pageBlockTable styleClass="slds-wrap"
+                                 value="{!AllProducts}" var="item"
+                                 headerClass="slds-line-height_reset">
+                <apex:column styleClass="slds-col slds-size_3-of-12">
+                    <apex:facet name="header">
+                        <div align="center">Image</div>
+                    </apex:facet>
+                    <div align="center">
+                        <apex:image width="30%" height="20%" value="{!item.Image_Url__c}"/>
+                    </div>
+                </apex:column>
+                <apex:column styleClass="slds-col slds-size_3-of-12">
+                    <apex:facet name="header">
+                        <div align="center">TITLE</div>
+                    </apex:facet>
+                    <div align="center">
+                        <apex:outputLink value="/apex/Exam3DetailDescriptionPage?id={!item.Id}" target="_blank">
+                            {!item.Name}
+                        </apex:outputLink>
+                    </div>
+                </apex:column>
+                <apex:column styleClass="slds-col slds-size_4-of-12">
+                    <apex:facet name="header">
+                        <div align="center">DESCRIPTION</div>
+                    </apex:facet>
+                    <apex:outputText style="text-align:justify"
+                                     value="{!IF(LEN(item.Product__c) > 100,
+                                     LEFT(item.Product__c, 100) + '...', item.Product__c)}"/>
+                    <apex:outputLink value="/apex/Exam3DetailDescriptionPage?id={!item.Id}" target="_blank">
+                        Show_More
+                    </apex:outputLink>
+                </apex:column>
+                <apex:column styleClass="slds-col slds-size_1-of-12">
+                    <apex:facet name="header">
+                        <div align="center">COST</div>
+                    </apex:facet>
+                    <div align="center">{!item.Unit_Price__c} $</div>
+                </apex:column>
+                <apex:column styleClass="slds-col slds-size_1-of-12">
+                    <div align="center">
+                        <apex:outputLink style="width:70px; background-color: darkblue;"
+                                         styleClass="slds-button slds-button_brand"
+                                         value="/apex/Exam3OrderRegistrationPage?id={!item.Id}" target="_blank">
+                            Buy
+                        </apex:outputLink>
+                    </div>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
